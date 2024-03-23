@@ -52,7 +52,7 @@ int	PhoneBook::get_input(std::string str) {
 		std::cin >> input;
 		if (std::cin.fail()) {
 			std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			if (std::cin.eof()) {
 				std::cout << std::endl << "Error occurs while reading" << std::endl;
 				exit(1);

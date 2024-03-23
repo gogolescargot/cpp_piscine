@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Account.hpp"
-# include <iostream>
-# include <sstream>
-# include <ctime>
+#include "Account.hpp"
+#include <iostream>
+#include <sstream>
+#include <ctime>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -63,27 +63,25 @@ int	Account::getNbWithdrawals() {
 	return (_totalNbWithdrawals);
 }
 
-void pad_zero(std::ostringstream &oss, int n) {
-    if (n < 10)
-        oss << "0";
-    oss << n;
+void	pad_zero(std::ostringstream &oss, int n) {
+	if (n < 10)
+		oss << "0";
+	oss << n;
 }
 
-void Account::_displayTimestamp(void) {
-    std::time_t t = std::time(0);
-    std::tm* now = std::localtime(&t);
-
-    std::ostringstream oss;
-    oss << "[" << now->tm_year + 1900;
-    pad_zero(oss, now->tm_mon + 1);
-    pad_zero(oss, now->tm_mday);
-    oss << "_";
-    pad_zero(oss, now->tm_hour);
-    pad_zero(oss, now->tm_min);
-    pad_zero(oss, now->tm_sec);
-    oss << "]";
-
-    std::cout << oss.str();
+void	Account::_displayTimestamp(void) {
+	std::time_t t = std::time(0);
+	std::tm* now = std::localtime(&t);
+	std::ostringstream	oss;
+	oss << "[" << now->tm_year + 1900;
+	pad_zero(oss, now->tm_mon + 1);
+	pad_zero(oss, now->tm_mday);
+	oss << "_";
+	pad_zero(oss, now->tm_hour);
+	pad_zero(oss, now->tm_min);
+	pad_zero(oss, now->tm_sec);
+	oss << "]";
+	std::cout << oss.str();
 }
 
 void	Account::displayAccountsInfos(void) {

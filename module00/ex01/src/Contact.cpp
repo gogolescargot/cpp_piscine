@@ -62,7 +62,6 @@ void	Contact::display() {
 
 std::string	Contact::get_input(std::string str) {
 	std::string input;
-
 	while (true) {
 		std::cout << str;
 		if (!std::getline(std::cin, input))
