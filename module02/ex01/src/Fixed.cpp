@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalon <ggalon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:41:51 by ggalon            #+#    #+#             */
-/*   Updated: 2024/03/25 17:47:56 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/03/26 05:52:54 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ Fixed::Fixed()
 Fixed::Fixed(const int n)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(n << _fractional);
+	this->setRawBits(n << _frac_bits);
 }
 
 Fixed::Fixed(const float n)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(roundf(n * (1 << _fractional)));
+	this->setRawBits(roundf(n * (1 << _frac_bits)));
 }
 
 Fixed::Fixed(const Fixed &fixed)
@@ -69,10 +69,10 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat() const
 {
-	return ((float)this->getRawBits() / (1 << _fractional));
+	return ((float)this->getRawBits() / (1 << _frac_bits));
 }
 
 int Fixed::toInt() const
 {
-	return (this->getRawBits() >> _fractional);
+	return (this->getRawBits() >> _frac_bits);
 }
