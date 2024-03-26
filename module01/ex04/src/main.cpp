@@ -15,14 +15,15 @@
 
 std::string replace(std::string buffer, std::string search, std::string replace)
 {
-	int i = 0;
+	size_t i = 0;
 	while (true)
 	{
 		i = buffer.find(search, i);
-		if (i == -1)
+		if (i == std::string::npos)
 			break ;
 		buffer.erase(i, search.length());
 		buffer.insert(i, replace);
+		i += replace.length() + 1;
 	}
 	return (buffer);
 }
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
 	{
 		while (std::getline(infile, buffer))
 		{
-			outfile << replace(buffer, s1, s2);
+			outfile << replace(buffer, s1, s2) << "\n";
 		}
 	}
 	

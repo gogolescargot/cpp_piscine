@@ -6,7 +6,7 @@
 #    By: ggalon <ggalon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 16:28:38 by ggalon            #+#    #+#              #
-#    Updated: 2024/03/26 15:00:34 by ggalon           ###   ########.fr        #
+#    Updated: 2024/03/26 15:43:04 by ggalon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ INCL_DIR	=	inc/
 
 # FILES ========================================================================
 
-NAME	=	ex03
+NAME	=	ex00
 
-FILE_C	=	main bsp Fixed Point
+FILE_C	=	main ClapTrap
 
-FILE_H	=	Fixed Point
+FILE_H	=	ClapTrap
 
 SRCS	=	$(addsuffix .cpp, $(addprefix $(SRCS_DIR), $(FILE_C)))
 
@@ -51,7 +51,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CC_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp $(INCL) Makefile
-	$(CC) $(CC_FLAGS) -c $< -o $@
+	$(CC) $(CC_FLAGS) -i $(INCL_DIR) -c $< -o $@
 
 clean:
 	@ echo "\n${BRed}Exercice binary deletion...${NC}"

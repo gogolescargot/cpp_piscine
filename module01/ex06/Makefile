@@ -34,7 +34,7 @@ INCL	=	$(addsuffix .hpp, $(addprefix $(INCL_DIR), $(FILE_H)))
 
 # COMMANDS =====================================================================
 
-CC			=	g++
+CC			=	c++
 
 CC_FLAGS	=	-Wall -Wextra -Werror -std=c++98
 

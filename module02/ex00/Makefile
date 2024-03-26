@@ -6,7 +6,7 @@
 #    By: ggalon <ggalon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 16:28:38 by ggalon            #+#    #+#              #
-#    Updated: 2024/03/25 14:23:20 by ggalon           ###   ########.fr        #
+#    Updated: 2024/03/26 15:00:20 by ggalon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ INCL	=	$(addsuffix .hpp, $(addprefix $(INCL_DIR), $(FILE_H)))
 
 # COMMANDS =====================================================================
 
-CC			=	g++
+CC			=	c++
 
 CC_FLAGS	=	-Wall -Wextra -Werror -std=c++98
 
