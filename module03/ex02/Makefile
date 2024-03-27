@@ -6,7 +6,7 @@
 #    By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 16:28:38 by ggalon            #+#    #+#              #
-#    Updated: 2024/03/27 08:50:46 by ggalon           ###   ########.fr        #
+#    Updated: 2024/03/27 08:53:34 by ggalon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ INCL_DIR	=	inc/
 
 # FILES ========================================================================
 
-NAME	=	ex01
+NAME	=	ex02
 
-FILE_C	=	main ClapTrap ScavTrap
+FILE_C	=	main ClapTrap ScavTrap FragTrap
 
-FILE_H	=	ClapTrap ScavTrap
+FILE_H	=	ClapTrap ScavTrap FragTrap
 
 SRCS	=	$(addsuffix .cpp, $(addprefix $(SRCS_DIR), $(FILE_C)))
 

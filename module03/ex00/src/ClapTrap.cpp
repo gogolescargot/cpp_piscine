@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalon <ggalon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:48:09 by ggalon            #+#    #+#             */
-/*   Updated: 2024/03/26 18:52:53 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/03/27 08:45:02 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap()
+{
+	std::cout << "ClapTrap default constructor called" << std::endl;
+	_name = "ClapTrap";
+	_health = 10;
+	_energy = 10;
+	_damage = 0;
+}
 
 ClapTrap::ClapTrap(std::string name)
 {
@@ -35,7 +44,7 @@ ClapTrap::ClapTrap(const ClapTrap &claptrap)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	_name = claptrap._name;
 	_health = claptrap._health;
 	_energy = claptrap._energy;
@@ -50,8 +59,16 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string &target)
 {
-	if (!checkClapTrap(*this, "attack"))
+	if (_health == 0)
+	{
+		std::cout << "ClapTrap " << _name << " try to attack but not enough health..." << std::endl;
 		return;
+	}
+	if (_energy == 0)
+	{
+		std::cout << "ClapTrap " << _name << " try to attack but not enough energy..." << std::endl;;
+		return;
+	}
 	std::cout << "ClapTrap " << _name << " attacks " << target << " causing " << _damage << " points of damage!" << std::endl;
 	_energy--;
 }
@@ -70,47 +87,17 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (!checkClapTrap(*this, "repair"))
+	if (_health == 0)
+	{
+		std::cout << "ClapTrap " << _name << " try to repair but not enough health..." << std::endl;
 		return;
+	}
+	if (_energy == 0)
+	{
+		std::cout << "ClapTrap " << _name << " try to repair but not enough energy..." << std::endl;;
+		return;
+	}
 	_energy--;
 	_health += amount;
 	std::cout << "ClapTrap " << _name << " get repaired " << amount << " points of health!" << std::endl;
-}
-
-void ClapTrap::displayStats()
-{
-	std::cout << "Name: " << _name << std::endl;
-	std::cout << "Health: " << _health << std::endl;
-	std::cout << "Energy: " << _energy << std::endl;
-}
-
-
-unsigned int ClapTrap::getHealth() const
-{
-	return (_health);
-}
-
-unsigned int ClapTrap::getEnergy() const
-{
-	return (_energy);
-}
-
-std::string ClapTrap::getName() const
-{
-	return (_name);
-}
-
-bool checkClapTrap(const ClapTrap &claptrap, std::string str)
-{
-	if (claptrap.getHealth() == 0)
-	{
-		std::cout << "ClapTrap " << claptrap.getName() << " try to " << str << " but not enough health..." << std::endl;
-		return (false);
-	}
-	if (claptrap.getEnergy() == 0)
-	{
-		std::cout << "ClapTrap " << claptrap.getName() << " try to " << str << " but not enough energy..." << std::endl;;
-		return (false);
-	}
-	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalon <ggalon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:34:23 by ggalon            #+#    #+#             */
-/*   Updated: 2024/03/26 18:55:57 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/03/27 08:44:25 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class ClapTrap
 		unsigned int _damage;
 
 	public:
+		ClapTrap();
 		ClapTrap(std::string);
 		ClapTrap(const ClapTrap&);
 		ClapTrap &operator=(const ClapTrap&);
@@ -34,13 +35,6 @@ class ClapTrap
 		void takeDamage(unsigned int);
 		void beRepaired(unsigned int);
 
-		unsigned int getHealth() const;
-		unsigned int getEnergy() const;
-		std::string getName() const;
-		void displayStats();
-
 };
-
-bool checkClapTrap(const ClapTrap&, std::string str);
 
 #endif
