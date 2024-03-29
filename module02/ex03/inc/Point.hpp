@@ -32,6 +32,7 @@ class Point
 		void setY(const Fixed&);
 };
 
+std::ostream &operator<<(std::ostream&, const Point&);
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
