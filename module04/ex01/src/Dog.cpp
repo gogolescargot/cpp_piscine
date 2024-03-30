@@ -54,4 +54,3 @@ std::string Dog::getIdeas(unsigned int i) const
 {
 	return (_brain->getIdeas(i));
 }
-
