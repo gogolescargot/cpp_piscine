@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:41:51 by ggalon            #+#    #+#             */
-/*   Updated: 2024/03/26 05:52:54 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/03/30 01:46:01 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Fixed &Fixed::operator=(const Fixed &fixed)
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
 {
 	os << fixed.toFloat();
-	return os;
+	return (os);
 }
 
 

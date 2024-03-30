@@ -29,7 +29,7 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap(const DiamondTrap&);
 		DiamondTrap &operator=(const DiamondTrap&);
 		~DiamondTrap();
-		
+
 		void whoAmI();
 
 };

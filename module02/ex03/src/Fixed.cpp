@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:41:51 by ggalon            #+#    #+#             */
-/*   Updated: 2024/03/26 06:22:10 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/03/30 01:45:44 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ Fixed Fixed::operator--(int)
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
 {
 	os << fixed.toFloat();
-	return os;
+	return (os);
 }
 
 const Fixed &Fixed::min(const Fixed& a, const Fixed& b)

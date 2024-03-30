@@ -6,7 +6,7 @@
 #    By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 16:28:38 by ggalon            #+#    #+#              #
-#    Updated: 2024/03/27 09:03:07 by ggalon           ###   ########.fr        #
+#    Updated: 2024/03/30 07:31:41 by ggalon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ INCL	=	$(addsuffix .hpp, $(addprefix $(INCL_DIR), $(FILE_H)))
 
 CC			=	c++
 
-CC_FLAGS	=	-Wall -Wextra -Werror -std=c++98
+CC_FLAGS	=	-Wall -Wextra -Werror -std=c++98 -I ./inc
 
 # RULES ========================================================================
 
@@ -51,7 +51,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CC_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp $(INCL) Makefile
-	$(CC) $(CC_FLAGS) -I ./inc -c $< -o $@
+	$(CC) $(CC_FLAGS) -c $< -o $@
 
 clean:
 	@ echo "\n${BRed}Exercice binary deletion...${NC}"
