@@ -22,9 +22,9 @@ INCL_DIR	=	inc/
 
 NAME	=	ex02
 
-FILE_C	=	Bureaucrat AForm ShrubberyCreationForm main
+FILE_C	=	Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm main
 
-FILE_H	=	Bureaucrat AForm ShrubberyCreationForm
+FILE_H	=	Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm
 
 SRCS	=	$(addsuffix .cpp, $(addprefix $(SRCS_DIR), $(FILE_C)))
 
