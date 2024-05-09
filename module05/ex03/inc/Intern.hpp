@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 05:37:45 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/09 19:38:19 by ggalon           ###   ########.fr       */
+/*   Created: 2024/05/09 19:30:27 by ggalon            #+#    #+#             */
+/*   Updated: 2024/05/09 19:49:12 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#ifndef INTERN_HPP
+# define INTERN_HPP
 
-int main()
+# include "AForm.hpp"
+# include "ShrubberyCreationForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "PresidentialPardonForm.hpp"
+
+class AForm;
+
+class Intern
 {
-	Bureaucrat jean("Jean", 1);
-	PresidentialPardonForm form("me");
-	form.sign();
-	try
-	{
-		form.execute(jean);
-		jean.executeForm(form);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (0);
-}
+	public:
+		Intern();
+		~Intern();
+		Intern(const Intern&);
+		Intern& operator=(const Intern&);
+		AForm* makeForm(std::string, std::string);
+};
+
+#endif

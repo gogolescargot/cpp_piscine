@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:34:55 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/09 04:48:18 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/09 19:37:39 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void Bureaucrat::signForm(AForm &form)
 {
 	if (this->getGrade() > form.getSignGrade())
 	{
-		std::cout << this->getName() << " couldn't sign " << form.getName() << " because grade is too low" << std::endl;
+		std::cerr << this->getName() << " couldn't sign " << form.getName() << " because grade is too low" << std::endl;
 		throw (Bureaucrat::GradeTooLowException());
 	}
 	else
@@ -93,4 +93,15 @@ void Bureaucrat::signForm(AForm &form)
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
 		form.sign();
 	}
+}
+
+void Bureaucrat::executeForm(const AForm &form)
+{
+	if (!form.getSigned())
+				std::cerr << this->getName() << " couldn't execute " << form.getName() << " because form is not signed" << std::endl;
+
+	else if (this->getGrade() > form.getExecuteGrade())
+		std::cerr << this->getName() << " couldn't execute " << form.getName() << " because grade is too low" << std::endl;
+	else
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
 }

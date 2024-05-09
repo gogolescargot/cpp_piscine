@@ -6,12 +6,12 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:34:55 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/09 19:36:37 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/09 19:38:45 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(75)
 {
@@ -81,7 +81,7 @@ void Bureaucrat::decrementGrade()
 	this->setGrade(++_grade);
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	if (this->getGrade() > form.getSignGrade())
 	{
@@ -93,4 +93,15 @@ void Bureaucrat::signForm(Form &form)
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
 		form.sign();
 	}
+}
+
+void Bureaucrat::executeForm(const AForm &form)
+{
+	if (!form.getSigned())
+				std::cerr << this->getName() << " couldn't execute " << form.getName() << " because form is not signed" << std::endl;
+
+	else if (this->getGrade() > form.getExecuteGrade())
+		std::cerr << this->getName() << " couldn't execute " << form.getName() << " because grade is too low" << std::endl;
+	else
+		std::cout << this->getName() << " executed " << form.getName() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 05:37:45 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/09 19:38:19 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/09 20:13:00 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
-	Bureaucrat jean("Jean", 1);
-	PresidentialPardonForm form("me");
-	form.sign();
-	try
-	{
-		form.execute(jean);
-		jean.executeForm(form);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	Bureaucrat someRandomBureaucrat("Jean", 1);
+	Intern someRandomIntern;
+	AForm* rrf;
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	someRandomBureaucrat.signForm(*rrf);
+	rrf->execute(someRandomBureaucrat);
 	return (0);
 }
