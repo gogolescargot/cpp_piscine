@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 15:08:52 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/13 17:25:53 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/13 17:28:55 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ class Array {
 			std::copy(src._array, src._array + _size, _array);
 		}
 
-		Array<T>& operator=(const Array<T>& src)
+		T& operator=(const Array<T>& src)
 		{
 			delete[] _array;
 			_array = new T[src._size];
