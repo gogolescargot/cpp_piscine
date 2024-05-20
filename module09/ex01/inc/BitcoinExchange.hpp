@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:54:20 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/20 22:47:26 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/18 20:59:08 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@
 # include <algorithm>
 # include <map>
 
-int btc(const std::string&);
+// class BitcoinExchange
+// {
+// private:
+// 	std::map<std::string, double> _map;
+// public:
+// 	BitcoinExchange();
+// 	~BitcoinExchange();
+// };
+
+// BitcoinExchange::BitcoinExchange(/* args */)
+// {
+// }
+
+// BitcoinExchange::~BitcoinExchange()
+// {
+// }
 
 #endif
