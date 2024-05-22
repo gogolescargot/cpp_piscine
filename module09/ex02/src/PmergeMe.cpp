@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:28:49 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/22 20:44:19 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/05/22 21:26:43 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void displayVector(std::vector<int>& vector)
 	std::cout << std::endl;
 }
 
-int binarySearchVector(const std::vector<int> &S, int end, int key)
+int binarySearchVector(const std::vector<int>& S, int end, int key)
 {
 	int begin = 0;
 	while (begin <= end)
@@ -87,7 +87,7 @@ int binarySearchVector(const std::vector<int> &S, int end, int key)
 	return (begin);
 }
 
-void insertElementsVector(std::vector<int> &S, const std::vector<std::pair<int, int> > &pairs, int last)
+void insertElementsVector(std::vector<int>& S, const std::vector<std::pair<int, int> >& pairs, int last)
 {	
 	for (size_t i = 1; jacobsthal(i - 1) < pairs.size() - 1; i++)
 	{
@@ -123,8 +123,8 @@ int mergeInsertionSortVector(std::vector<int>& X)
 	// Group elements into pairs and determine the larger element in each pair and leave the last one if odd elements
 	for (size_t i = 0; i < X.size() / 2; ++i)
 	{
-		int a = X[2 * i];
-		int b = X[2 * i + 1];
+		int a = X[i * 2];
+		int b = X[i * 2 + 1];
 		if (a > b)
 			std::swap(a, b);
 		pairs.push_back(std::make_pair(a, b));
@@ -137,7 +137,7 @@ int mergeInsertionSortVector(std::vector<int>& X)
 	// Insert at the start of S the element that was paired with the first and smallest element of S
 	S.insert(S.begin(), pairs[0].first);
 
-	// Insert the remaining elements into S
+	// Insert the remaining elements into S using Jacobsthal numbers
 	if (X.size() % 2 == 1)
 		insertElementsVector(S, pairs, X[X.size() - 1]);
 	else 
@@ -176,7 +176,7 @@ void displayDeque(std::deque<int>& deque)
 	std::cout << std::endl;
 }
 
-int binarySearchDeque(const std::deque<int> &S, int end, int key)
+int binarySearchDeque(const std::deque<int>& S, int end, int key)
 {
 	int begin = 0;
 	while (begin <= end)
@@ -198,7 +198,7 @@ int binarySearchDeque(const std::deque<int> &S, int end, int key)
 	return (begin);
 }
 
-void insertElementsDeque(std::deque<int> &S, const std::deque<std::pair<int, int> > &pairs, int last)
+void insertElementsDeque(std::deque<int>& S, const std::deque<std::pair<int, int> >& pairs, int last)
 {
 	for (size_t i = 1; jacobsthal(i - 1) < pairs.size() - 1; i++)
 	{
@@ -231,8 +231,8 @@ int mergeInsertionSortDeque(std::deque<int>& X)
 
 	for (size_t i = 0; i < X.size() / 2; ++i)
 	{
-		int a = X[2 * i];
-		int b = X[2 * i + 1];
+		int a = X[i * 2];
+		int b = X[i * 2 + 1];
 		if (a > b)
 			std::swap(a, b);
 		pairs.push_back(std::make_pair(a, b));
