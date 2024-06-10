@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:48:31 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/16 12:01:25 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:46:43 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ unsigned int Span::shortestSpan()
 	std::multiset<int>::iterator it = ++_array.begin();
 	unsigned int min = *it - *--it;
 	it++;
-	for (it++; it != _array.end(); it++)
+	for (; it != _array.end(); it++)
 	{
-		min = std::min(static_cast<unsigned int>(*it - *--it), min);
-		it++;
+		std::multiset<int>::iterator prev_it = it;
+		prev_it--;
+		min = std::min(static_cast<unsigned int>(*it - *prev_it), min);
 	}
 	return (min);
 }
