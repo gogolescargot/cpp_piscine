@@ -6,7 +6,7 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:28:49 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/22 21:26:43 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/06/11 17:33:13 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,32 @@ size_t jacobsthal(size_t x)
 	return (jacobsthal(x - 1) + 2 * jacobsthal(x - 2));
 }
 
-int checkArg(const std::string& arg)
+int checkArg(const char *argv[])
 {
-	for (int i = 0; arg[i]; i++)
+	for (int i = 1; argv[i]; i++)
 	{
-		if (arg[i] != '+' && arg[i] != ' ' && !isdigit(arg[i]))
+		for (int j = 0; argv[i][j]; j++)
 		{
-			std::cerr << "Error: Invalid character" << std::endl;
-			return (1);
+			if (j == 0 && argv[i][j] != '+' && !isdigit(argv[i][j]))
+			{
+				std::cerr << "Error: Invalid character" << std::endl;
+				return (1);
+			}
+			if (j != 0 && !isdigit(argv[i][j]))
+			{
+				std::cerr << "Error: Invalid character" << std::endl;
+				return (1);
+			}
 		}
 	}
 	return (0);
 }
 
-int insertNbrVector(const std::string& arg, std::vector<int>& vector)
+int insertNbrVector(const char *argv[], std::vector<int>& vector)
 {
-	std::stringstream ss(arg);
-	std::string element;
-
-	while (std::getline(ss, element, ' '))
+	for (int i = 1; argv[i]; i++)
 	{
-		int nbr = atoi(element.c_str());
+		int nbr = atoi(argv[i]);
 		if (std::find(vector.begin(), vector.end(), nbr) != vector.end())
 		{
 			std::cerr << "Error: Duplicate number" << std::endl;
@@ -65,17 +70,29 @@ void displayVector(std::vector<int>& vector)
 	std::cout << std::endl;
 }
 
+void insertionSortVector(std::vector<std::pair<int, int> >& pairs)
+{
+	int n = pairs.size();
+	for (int i = 1; i < n; i++)
+	{
+		std::pair<int, int> key = pairs[i];
+		int j = i - 1;
+		while (j >= 0 && pairs[j].second > key.second)
+		{
+			pairs[j + 1] = pairs[j];
+			j--;
+		}
+		pairs[j + 1] = key;
+	}
+}
+
 int binarySearchVector(const std::vector<int>& S, int end, int key)
 {
 	int begin = 0;
 	while (begin <= end)
 	{
 		int mid = begin + (end - begin) / 2;
-		if (S[mid] == key)
-		{
-			return (mid + 1);
-		}
-		else if (S[mid] < key)
+		if (S[mid] < key)
 		{
 			begin = mid + 1;
 		}
@@ -131,7 +148,10 @@ int mergeInsertionSortVector(std::vector<int>& X)
 		S.push_back(b);
 	}
 
-	// Recursively sort the larger elements from each pair
+	// Sort the larger elements from each pair
+	insertionSortVector(pairs);
+
+	// Recursively make pairs from the highest elements of each pairs
 	mergeInsertionSortVector(S);
 
 	// Insert at the start of S the element that was paired with the first and smallest element of S
@@ -149,14 +169,11 @@ int mergeInsertionSortVector(std::vector<int>& X)
 
 // ==============================================================================================
 
-int insertNbrDeque(const std::string& arg, std::deque<int>& deque)
+int insertNbrDeque(const char *argv[], std::deque<int>& deque)
 {
-	std::stringstream ss(arg);
-	std::string element;
-
-	while (std::getline(ss, element, ' '))
+	for (int i = 1; argv[i]; i++)
 	{
-		int nbr = atoi(element.c_str());
+		int nbr = atoi(argv[i]);
 		if (std::find(deque.begin(), deque.end(), nbr) != deque.end())
 		{
 			std::cerr << "Error: Duplicate number" << std::endl;
@@ -174,6 +191,22 @@ void displayDeque(std::deque<int>& deque)
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
+}
+
+void insertionSortDeque(std::deque<std::pair<int, int> >& pairs)
+{
+	int n = pairs.size();
+	for (int i = 1; i < n; i++)
+	{
+		std::pair<int, int> key = pairs[i];
+		int j = i - 1;
+		while (j >= 0 && pairs[j].second > key.second)
+		{
+			pairs[j + 1] = pairs[j];
+			j--;
+		}
+		pairs[j + 1] = key;
+	}
 }
 
 int binarySearchDeque(const std::deque<int>& S, int end, int key)
@@ -238,6 +271,8 @@ int mergeInsertionSortDeque(std::deque<int>& X)
 		pairs.push_back(std::make_pair(a, b));
 		S.push_back(b);
 	}
+
+	insertionSortDeque(pairs);
 
 	mergeInsertionSortDeque(S);
 

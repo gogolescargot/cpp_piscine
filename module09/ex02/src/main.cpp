@@ -6,17 +6,17 @@
 /*   By: ggalon <ggalon@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:17:44 by ggalon            #+#    #+#             */
-/*   Updated: 2024/05/21 22:09:43 by ggalon           ###   ########.fr       */
+/*   Updated: 2024/06/11 17:02:03 by ggalon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <unistd.h>
-int main(int argc, char const *argv[])
+int main(int argc, const char *argv[])
 {
 	clock_t start, end;
 
-	if (argc != 2)
+	if (argc < 2)
 	{
 		std::cerr << "Error: Wrong argument number" << std::endl;
 		return (1);
@@ -26,15 +26,15 @@ int main(int argc, char const *argv[])
 	std::deque<int> deque;
 	double elapsed_time_ms;
 	
-	if (checkArg(argv[1]))
+	if (checkArg(argv))
 	{
 		return (1);
 	}
-	if (insertNbrVector(argv[1], vector))
+	if (insertNbrVector(argv, vector))
 	{
 		return (1);
 	}
-	if (insertNbrDeque(argv[1], deque))
+	if (insertNbrDeque(argv, deque))
 	{
 		return (1);
 	}
