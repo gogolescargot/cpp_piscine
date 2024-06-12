@@ -70,22 +70,6 @@ void displayVector(std::vector<int>& vector)
 	std::cout << std::endl;
 }
 
-void insertionSortVector(std::vector<std::pair<int, int> >& pairs)
-{
-	int n = pairs.size();
-	for (int i = 1; i < n; i++)
-	{
-		std::pair<int, int> key = pairs[i];
-		int j = i - 1;
-		while (j >= 0 && pairs[j].second > key.second)
-		{
-			pairs[j + 1] = pairs[j];
-			j--;
-		}
-		pairs[j + 1] = key;
-	}
-}
-
 int binarySearchVector(const std::vector<int>& S, int end, int key)
 {
 	int begin = 0;
@@ -104,8 +88,22 @@ int binarySearchVector(const std::vector<int>& S, int end, int key)
 	return (begin);
 }
 
+int findPairVector(std::vector<std::pair<int, int> > pairs, int nbr)
+{
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		if (pairs[i].second == nbr)
+			return (pairs[i].first);
+	}
+	return (-1);
+}
+
 void insertElementsVector(std::vector<int>& S, const std::vector<std::pair<int, int> >& pairs, int last)
 {	
+	std::vector<int> SCopy(S);
+
+	S.insert(S.begin(), findPairVector(pairs, S[0]));
+
 	for (size_t i = 1; jacobsthal(i - 1) < pairs.size() - 1; i++)
 	{
 		size_t idx = jacobsthal(i);
@@ -114,8 +112,8 @@ void insertElementsVector(std::vector<int>& S, const std::vector<std::pair<int, 
 		{
 			if (idx < pairs.size())
 			{
-				int position = binarySearchVector(S, S.size() - 1, pairs[idx].first);
-				S.insert(S.begin() + position, pairs[idx].first);
+				int position = binarySearchVector(S, S.size() - 1, findPairVector(pairs, SCopy[idx]));
+				S.insert(S.begin() + position, findPairVector(pairs, SCopy[idx]));
 			}
 			idx--;
 		}
@@ -127,8 +125,6 @@ void insertElementsVector(std::vector<int>& S, const std::vector<std::pair<int, 
 	}
 }
 
-// https://en.wikipedia.org/wiki/Merge-insertion_sort
-
 int mergeInsertionSortVector(std::vector<int>& X)
 {
 	if (X.size() <= 1)
@@ -137,7 +133,6 @@ int mergeInsertionSortVector(std::vector<int>& X)
 	std::vector<std::pair<int, int> > pairs;
 	std::vector<int> S;
 
-	// Group elements into pairs and determine the larger element in each pair and leave the last one if odd elements
 	for (size_t i = 0; i < X.size() / 2; ++i)
 	{
 		int a = X[i * 2];
@@ -148,16 +143,8 @@ int mergeInsertionSortVector(std::vector<int>& X)
 		S.push_back(b);
 	}
 
-	// Sort the larger elements from each pair
-	insertionSortVector(pairs);
-
-	// Recursively make pairs from the highest elements of each pairs
 	mergeInsertionSortVector(S);
 
-	// Insert at the start of S the element that was paired with the first and smallest element of S
-	S.insert(S.begin(), pairs[0].first);
-
-	// Insert the remaining elements into S using Jacobsthal numbers
 	if (X.size() % 2 == 1)
 		insertElementsVector(S, pairs, X[X.size() - 1]);
 	else 
@@ -193,33 +180,13 @@ void displayDeque(std::deque<int>& deque)
 	std::cout << std::endl;
 }
 
-void insertionSortDeque(std::deque<std::pair<int, int> >& pairs)
-{
-	int n = pairs.size();
-	for (int i = 1; i < n; i++)
-	{
-		std::pair<int, int> key = pairs[i];
-		int j = i - 1;
-		while (j >= 0 && pairs[j].second > key.second)
-		{
-			pairs[j + 1] = pairs[j];
-			j--;
-		}
-		pairs[j + 1] = key;
-	}
-}
-
 int binarySearchDeque(const std::deque<int>& S, int end, int key)
 {
 	int begin = 0;
 	while (begin <= end)
 	{
 		int mid = begin + (end - begin) / 2;
-		if (S[mid] == key)
-		{
-			return (mid + 1);
-		}
-		else if (S[mid] < key)
+		if (S[mid] <= key)
 		{
 			begin = mid + 1;
 		}
@@ -231,8 +198,22 @@ int binarySearchDeque(const std::deque<int>& S, int end, int key)
 	return (begin);
 }
 
-void insertElementsDeque(std::deque<int>& S, const std::deque<std::pair<int, int> >& pairs, int last)
+int findPairDeque(std::deque<std::pair<int, int> > pairs, int nbr)
 {
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		if (pairs[i].second == nbr)
+			return (pairs[i].first);
+	}
+	return (-1);
+}
+
+void insertElementsDeque(std::deque<int>& S, const std::deque<std::pair<int, int> >& pairs, int last)
+{	
+	std::deque<int> SCopy(S);
+
+	S.insert(S.begin(), findPairDeque(pairs, S[0]));
+
 	for (size_t i = 1; jacobsthal(i - 1) < pairs.size() - 1; i++)
 	{
 		size_t idx = jacobsthal(i);
@@ -241,8 +222,8 @@ void insertElementsDeque(std::deque<int>& S, const std::deque<std::pair<int, int
 		{
 			if (idx < pairs.size())
 			{
-				int position = binarySearchDeque(S, S.size() - 1, pairs[idx].first);
-				S.insert(S.begin() + position, pairs[idx].first);
+				int position = binarySearchDeque(S, S.size() - 1, findPairDeque(pairs, SCopy[idx]));
+				S.insert(S.begin() + position, findPairDeque(pairs, SCopy[idx]));
 			}
 			idx--;
 		}
@@ -272,11 +253,7 @@ int mergeInsertionSortDeque(std::deque<int>& X)
 		S.push_back(b);
 	}
 
-	insertionSortDeque(pairs);
-
 	mergeInsertionSortDeque(S);
-
-	S.insert(S.begin(), pairs[0].first);
 
 	if (X.size() % 2 == 1)
 		insertElementsDeque(S, pairs, X[X.size() - 1]);

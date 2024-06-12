@@ -14,7 +14,8 @@
 #include <unistd.h>
 int main(int argc, const char *argv[])
 {
-	clock_t start, end;
+	struct timespec start, end;
+	double elapsedTime, s, us;
 
 	if (argc < 2)
 	{
@@ -24,7 +25,6 @@ int main(int argc, const char *argv[])
 
 	std::vector<int> vector;
 	std::deque<int> deque;
-	double elapsed_time_ms;
 	
 	if (checkArg(argv))
 	{
@@ -42,29 +42,34 @@ int main(int argc, const char *argv[])
 	std::cout << "Before: ";
 	displayVector(vector);
 
-	start = clock();
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	mergeInsertionSortVector(vector);
-	end = clock();
+	clock_gettime(CLOCK_MONOTONIC, &end);
 
 	std::cout << "After: ";
 	displayVector(vector);
 	
-	elapsed_time_ms = 1000.0 * (end - start) / CLOCKS_PER_SEC;
-	std::cout << "Time Vector: " <<  elapsed_time_ms << "ms" << std::endl;
+	s = end.tv_sec - start.tv_sec;
+	us = end.tv_nsec - start.tv_nsec;
+	elapsedTime = s * 1000000 + us / 1;
 
+    std::cout << "Time Vector: " << elapsedTime << " us" << std::endl;
 
 	std::cout << "Before: ";
 	displayDeque(deque);
 
-	start = clock();
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	mergeInsertionSortDeque(deque);
-	end = clock();
+	clock_gettime(CLOCK_MONOTONIC, &end);
 
 	std::cout << "After: ";
 	displayDeque(deque);
+
+	s = end.tv_sec - start.tv_sec;
+	us = end.tv_nsec - start.tv_nsec;
+	elapsedTime = s * 1000000 + us / 1;
 	
-	elapsed_time_ms = 1000.0 * (end - start) / CLOCKS_PER_SEC;
-	std::cout << "Time Deque: " <<  elapsed_time_ms << "ms" << std::endl;
+	std::cout << "Time Deque: " << elapsedTime << " us" << std::endl;
 
 	return (0);
 }
