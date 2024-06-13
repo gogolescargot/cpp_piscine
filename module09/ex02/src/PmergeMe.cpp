@@ -133,7 +133,7 @@ int mergeInsertionSortVector(std::vector<int>& X)
 	std::vector<std::pair<int, int> > pairs;
 	std::vector<int> S;
 
-	for (size_t i = 0; i < X.size() / 2; ++i)
+	for (size_t i = 0; i < X.size() / 2; i++)
 	{
 		int a = X[i * 2];
 		int b = X[i * 2 + 1];
@@ -243,7 +243,7 @@ int mergeInsertionSortDeque(std::deque<int>& X)
 	std::deque<std::pair<int, int> > pairs;
 	std::deque<int> S;
 
-	for (size_t i = 0; i < X.size() / 2; ++i)
+	for (size_t i = 0; i < X.size() / 2; i++)
 	{
 		int a = X[i * 2];
 		int b = X[i * 2 + 1];
