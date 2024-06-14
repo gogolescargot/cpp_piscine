@@ -53,7 +53,7 @@ int main(int argc, const char *argv[])
 	us = end.tv_usec  - start.tv_usec ;
 	elapsedTime = s * 1000000.0 + us;
 
-    std::cout << "Time Vector: " << elapsedTime << " us" << std::endl;
+    std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << elapsedTime << " us" << std::endl;
 
 	gettimeofday(&start, NULL);
 	mergeInsertionSortDeque(deque);
@@ -63,7 +63,7 @@ int main(int argc, const char *argv[])
 	us = end.tv_usec - start.tv_usec;
 	elapsedTime = s * 1000000.0 + us;
 	
-	std::cout << "Time Deque: " << elapsedTime << " us" << std::endl;
+    std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque : " << elapsedTime << " us" << std::endl;
 
 	return (0);
 }
