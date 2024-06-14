@@ -16,9 +16,18 @@ int main(int argc, char const *argv[])
 {
 	if (argc != 2)
 	{
-		std::cerr << "Error: Wrong argument number" << std::endl;
+		std::cout << "Error: Wrong argument number" << std::endl;
 		return (1);
 	}
-	rpn(argv[1]);
+
+	try
+	{
+		rpn(argv[1]);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	
 	return (0);
 }

@@ -14,7 +14,7 @@
 
 void error(const std::string& msg)
 {
-	std::cerr << "Error: " << msg << std::endl;
+	std::cout << "Error: " << msg << std::endl;
 }
 
 void insertData(const std::string& line, std::map<std::string, double>& map)
@@ -40,7 +40,7 @@ int data(std::map<std::string, double> &map)
 
 	if (infile.fail())
 	{
-		error("Cannot open file");
+		error("could not open file.");
 		return (1);
 	}
 
@@ -60,12 +60,12 @@ int dateFormat(const std::string &date)
 	{
 		if ((i <= 3 || i == 5 || i == 6 || i == 8 || i == 9) && !std::isdigit(date[i]))
 		{
-			std::cerr << "Formatting error: Date format" << std::endl;
+			error("bad input => " + date);
 			return (1);
 		}
 		if ((i == 4 || i == 7) && date[i] != '-')
 		{
-			std::cerr << "Formatting error: Date format" << std::endl;
+			error("bad input => " + date);
 			return (1);
 		}
 	}
@@ -83,7 +83,7 @@ int dateValid(const std::string &date)
 
 	if (month > 12 || month == 0 || day == 0)
 	{
-		std::cerr << "Formatting error: Date value" << std::endl;
+		error("bad input => " + date);
 		return (1);
 	}
 
@@ -96,7 +96,7 @@ int dateValid(const std::string &date)
 
 	if (day > maxDate[month - 1])
 	{
-		std::cerr << "Formatting error: Date not possible" << std::endl;
+		error("bad input => " + date);
 		return (1);
 	}
 
@@ -112,13 +112,13 @@ int readDate(const std::string &line, std::string &date)
 
 	if (line.length() < 14)
 	{
-		std::cerr << "Formatting error: Lengh" << std::endl;
+		error("bad input => " + line);
 		return (1);
 	}
 
 	if (line.substr(10, 3) != " | ")
 	{
-		std::cerr << "Formatting error: ' | '" << std::endl;
+		error("bad input => " + line);
 		return (1);
 	}
 
@@ -140,11 +140,30 @@ int readDate(const std::string &line, std::string &date)
 int readValue(const std::string &line, double &value)
 {
 	std::stringstream ss(line.substr(13));
+
+	if (line[13] == '-')
+	{
+		error("not a positive number.");
+		return (1);
+	}
+	else if (line[13] != '+' && !isdigit(line[13]))
+	{
+		error("bad input => " + line.substr(13));
+	}
+	
+	for (int i = 14; line[i]; i++)
+	{
+		if (!isdigit(line[i]))
+		{
+			error("bad input => " + line.substr(13));
+		}
+	}
+
 	ss >> value;
 	
 	if (value < 0 || value > 1000)
 	{
-		std::cerr << "Formatting error: Value" << std::endl;
+		error("too large a number.");
 		return (1);
 	}
 
@@ -156,7 +175,7 @@ void displayResult(const std::string &date, const double &value, std::map<std::s
 	double total;
 	std::map<std::string, double>::iterator it;
 
-	it = map.lower_bound(date);
+	it = --map.upper_bound(date);
 
 	if (it == map.end())
 	{
@@ -180,7 +199,7 @@ int exchangeBtc(const std::string& filepath, std::map<std::string, double> &map)
 
 	if (infile.fail())
 	{
-		error("Cannot open file");
+		error("could not open file.");
 		return (1);
 	}
 
@@ -204,6 +223,7 @@ int exchangeBtc(const std::string& filepath, std::map<std::string, double> &map)
 int btc(const std::string& filepath)
 {
 	std::map<std::string, double> map;
+
 	if (data(map))
 	{
 		return (1);

@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <unistd.h>
+
 int main(int argc, const char *argv[])
 {
-	struct timespec start, end;
+	struct timeval start, end;
 	double elapsedTime, s, us;
 
 	if (argc < 2)
 	{
-		std::cerr << "Error: Wrong argument number" << std::endl;
+		std::cout << "Error: Wrong argument number" << std::endl;
 		return (1);
 	}
 
@@ -42,32 +42,26 @@ int main(int argc, const char *argv[])
 	std::cout << "Before: ";
 	displayVector(vector);
 
-	clock_gettime(CLOCK_MONOTONIC, &start);
+	gettimeofday(&start, NULL);
 	mergeInsertionSortVector(vector);
-	clock_gettime(CLOCK_MONOTONIC, &end);
+	gettimeofday(&end, NULL);
 
 	std::cout << "After: ";
 	displayVector(vector);
 	
 	s = end.tv_sec - start.tv_sec;
-	us = end.tv_nsec - start.tv_nsec;
-	elapsedTime = s * 1000000 + us / 1;
+	us = end.tv_usec  - start.tv_usec ;
+	elapsedTime = s * 1000000.0 + us;
 
     std::cout << "Time Vector: " << elapsedTime << " us" << std::endl;
 
-	std::cout << "Before: ";
-	displayDeque(deque);
-
-	clock_gettime(CLOCK_MONOTONIC, &start);
+	gettimeofday(&start, NULL);
 	mergeInsertionSortDeque(deque);
-	clock_gettime(CLOCK_MONOTONIC, &end);
-
-	std::cout << "After: ";
-	displayDeque(deque);
+	gettimeofday(&end, NULL);
 
 	s = end.tv_sec - start.tv_sec;
-	us = end.tv_nsec - start.tv_nsec;
-	elapsedTime = s * 1000000 + us / 1;
+	us = end.tv_usec - start.tv_usec;
+	elapsedTime = s * 1000000.0 + us;
 	
 	std::cout << "Time Deque: " << elapsedTime << " us" << std::endl;
 

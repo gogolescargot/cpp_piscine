@@ -12,14 +12,12 @@
 
 #include "BitcoinExchange.hpp"
 
-
-
 int main(int argc, char const *argv[])
 {
 	(void)argv;
 	if (argc != 2)
 	{
-		std::cerr << ("Error: Wrong argument number") << std::endl;
+		std::cout << ("Error: Wrong argument number") << std::endl;
 		return (1);
 	}
 	btc(argv[1]);

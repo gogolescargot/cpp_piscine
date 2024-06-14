@@ -33,12 +33,12 @@ int checkArg(const char *argv[])
 		{
 			if (j == 0 && argv[i][j] != '+' && !isdigit(argv[i][j]))
 			{
-				std::cerr << "Error: Invalid character" << std::endl;
+				std::cout << "Error: Invalid character" << std::endl;
 				return (1);
 			}
 			if (j != 0 && !isdigit(argv[i][j]))
 			{
-				std::cerr << "Error: Invalid character" << std::endl;
+				std::cout << "Error: Invalid character" << std::endl;
 				return (1);
 			}
 		}
@@ -53,7 +53,7 @@ int insertNbrVector(const char *argv[], std::vector<int>& vector)
 		int nbr = atoi(argv[i]);
 		if (std::find(vector.begin(), vector.end(), nbr) != vector.end())
 		{
-			std::cerr << "Error: Duplicate number" << std::endl;
+			std::cout << "Error: Duplicate number" << std::endl;
 			return (1);
 		}
 		vector.push_back(nbr);
@@ -163,7 +163,7 @@ int insertNbrDeque(const char *argv[], std::deque<int>& deque)
 		int nbr = atoi(argv[i]);
 		if (std::find(deque.begin(), deque.end(), nbr) != deque.end())
 		{
-			std::cerr << "Error: Duplicate number" << std::endl;
+			std::cout << "Error: Duplicate number" << std::endl;
 			return (1);
 		}
 		deque.push_back(nbr);
